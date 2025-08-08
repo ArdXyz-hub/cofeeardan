@@ -3,175 +3,157 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Halaman Keren</title>
-
+<title>Tampilan Keren 2x2</title>
 <style>
-    /* Load font Minecraft */
-    @font-face {
-        font-family: 'Minecraft';
-        src: url('minecraftmedium.otf') format('opentype');
-    }
-
-    body {
+    /* Background + overlay gelap & blur */
+    body, html {
         margin: 0;
         padding: 0;
-        font-family: 'Minecraft', sans-serif;
+        height: 100%;
+        overflow: hidden;
+        font-family: sans-serif;
         color: white;
-        height: 100vh;
+        text-align: center;
+        position: relative;
+    }
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: url('background.png') no-repeat center center/cover;
+        filter: blur(4px) brightness(0.6);
+        z-index: -1;
+    }
+
+    .container {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        align-items: center;
-        overflow: hidden;
-        background: url('background.png') center/cover no-repeat;
-        position: relative;
-    }
-
-    /* Overlay gelap + blur */
-    body::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.4);
-        backdrop-filter: blur(4px);
-        z-index: 0;
-    }
-
-    .content {
-        position: relative;
-        z-index: 1;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    /* Logo animasi */
-    .logo {
-        width: 120px;
-        margin-top: 20px;
-        animation: logoSpin 5s linear infinite;
-    }
-
-    @keyframes logoSpin {
-        0% { transform: rotate(0deg) scale(1); }
-        50% { transform: rotate(180deg) scale(1.1); }
-        100% { transform: rotate(360deg) scale(1); }
+        height: 100%;
     }
 
     /* Animasi teks typing */
-    .typing-text {
+    .top-text {
+        padding: 20px;
         font-size: 18px;
+        max-width: 90%;
+        margin: 0 auto;
         white-space: nowrap;
         overflow: hidden;
         border-right: 2px solid yellow;
         width: 0;
-        margin: 20px auto 40px;
         animation: typing 5s steps(60, end) forwards, blink 0.8s infinite;
-        text-align: center;
     }
-
     @keyframes typing {
         from { width: 0; }
-        to { width: 380px; }
+        to { width: 450px; }
     }
-
     @keyframes blink {
         50% { border-color: transparent; }
     }
 
-    .donasi-link {
+    .top-text a {
         color: yellow;
+        font-weight: bold;
         text-decoration: none;
     }
-    .donasi-link:hover {
+    .top-text a:hover {
         text-decoration: underline;
     }
 
     /* Icon 2x2 */
-    .icon-grid {
+    .icons-grid {
         display: grid;
         grid-template-columns: repeat(2, 100px);
-        grid-gap: 25px;
+        grid-gap: 40px;
         justify-content: center;
-        margin-bottom: 60px; /* jarak ke bawah */
+        align-items: center;
+        margin-top: 20px;
+        animation: fadeInUp 1.5s ease-out;
     }
-
-    .icon-grid a img {
-        width: 100px;
-        height: 100px;
-        object-fit: contain;
-        transition: transform 0.3s ease;
+    .icons-grid img {
+        width: 80px;
+        height: 80px;
+        cursor: pointer;
+        transition: transform 0.3s;
         animation: iconFloat 3s ease-in-out infinite;
     }
-
-    .icon-grid a img:hover {
-        transform: scale(1.1);
+    .icons-grid img:hover {
+        transform: scale(1.2) rotate(5deg);
     }
-
     @keyframes iconFloat {
         0%, 100% { transform: translateY(0); }
         50% { transform: translateY(-5px); }
     }
 
-    /* Area bawah */
-    .bottom-icons {
+    /* Bagian bawah */
+    .bottom-scene {
         display: flex;
         justify-content: center;
         align-items: flex-end;
-        margin-bottom: 30px;
-        gap: 80px; /* Jarak antar icon bawah */
+        gap: 40px;
+        padding-bottom: 50px; /* lebih ke atas biar terlihat */
+        animation: fadeUp 2s ease-out;
     }
-
     .campfire {
         width: 120px;
-        animation: campfireShake 1.5s infinite ease-in-out;
+        animation: flicker 0.4s infinite alternate;
     }
-
-    @keyframes campfireShake {
-        0%, 100% { transform: rotate(0deg); }
-        50% { transform: rotate(1deg); }
-    }
-
-    .guitar {
-        width: 120px;
+    .guitar-player {
+        width: 150px;
         animation: guitarMove 2s infinite ease-in-out;
     }
-
+    @keyframes flicker {
+        0% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+        50% { transform: scale(1.05) rotate(-2deg); filter: brightness(1.3); }
+        100% { transform: scale(1) rotate(2deg); filter: brightness(0.9); }
+    }
     @keyframes guitarMove {
         0%, 100% { transform: translateY(0); }
         50% { transform: translateY(-3px); }
+    }
+
+    /* Animasi masuk */
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(50px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 </style>
 </head>
 <body>
 
-<div class="content">
+<!-- Autoplay sound -->
+<audio autoplay loop>
+    <source src="sound.mp3" type="audio/mpeg">
+</audio>
 
-    <!-- Logo animasi -->
-    <img src="logo.png" alt="Logo" class="logo">
-
-    <!-- Teks ucapan -->
-    <div class="typing-text">
-        Terimakasih telah mengunjungi dan support!, 
-        Donasi? <a href="https://link-donasi.com" class="donasi-link">Klik disini</a>
+<div class="container">
+    
+    <!-- Teks animasi -->
+    <div class="top-text">
+        Terimakasih yang telah support Ardan, Aku sangat menghargai nya!, Donasi? 
+        <a href="https://link-donasi-kamu.com" target="_blank">Klik disini</a>
     </div>
 
-    <!-- Icon 2x2 di tengah -->
-    <div class="icon-grid">
-        <a href="https://tiktok.com" target="_blank"><img src="tiktok.png" alt="TikTok"></a>
-        <a href="https://youtube.com" target="_blank"><img src="saluran.png" alt="Saluran"></a>
-        <a href="https://wa.me/nomor" target="_blank"><img src="whatsapp.png" alt="WhatsApp"></a>
-        <a href="https://lunamd-link.com" target="_blank"><img src="lunamd.png" alt="LunaMd"></a>
+    <!-- Icon 2x2 -->
+    <div class="icons-grid">
+        <img src="whatsapp.png" alt="WhatsApp">
+        <img src="lunaasistent.png" alt="LunaAsistent">
+        <img src="saluran.png" alt="Saluran">
+        <img src="tiktok.png" alt="TikTok">
     </div>
-</div>
 
-<!-- Api unggun & gitar di bawah -->
-<div class="bottom-icons">
-    <img src="campfire.png" class="campfire" alt="Api Unggun">
-    <img src="guitar.png" class="guitar" alt="Orang Main Gitar">
+    <!-- Api unggun & gitar -->
+    <div class="bottom-scene">
+        <img src="campfire.png" class="campfire" alt="Api Unggun">
+        <img src="guitar.png" class="guitar-player" alt="Orang Bermain Gitar">
+    </div>
+
 </div>
 
 </body>
-                                                              </html>
-        
+</html>
