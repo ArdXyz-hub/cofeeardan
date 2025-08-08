@@ -6,7 +6,7 @@
 <title>Halaman Keren</title>
 
 <style>
-    /* Import font Minecraft */
+    /* Load font Minecraft */
     @font-face {
         font-family: 'Minecraft';
         src: url('minecraftmedium.otf') format('opentype');
@@ -15,139 +15,141 @@
     body {
         margin: 0;
         padding: 0;
+        font-family: 'Minecraft', sans-serif;
+        color: white;
         height: 100vh;
-        background: url('video.png') no-repeat center center/cover;
         display: flex;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
-        justify-content: space-between;
-        backdrop-filter: blur(3px) brightness(0.7);
-        font-family: 'Minecraft', sans-serif;
         overflow: hidden;
-        color: white;
+        background: url('background.png') center/cover no-repeat;
+        position: relative;
     }
 
-    /* Logo bergerak */
-    .logo {
-        width: 80px;
-        height: 80px;
-        animation: bounce 2s infinite;
-        margin-top: 20px;
-    }
-    @keyframes bounce {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
+    /* Overlay gelap + blur */
+    body::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(4px);
+        z-index: 0;
     }
 
-    /* Teks animasi */
-    .typing-text {
-        font-size: 1.5em;
+    .container {
+        position: relative;
+        z-index: 1;
         text-align: center;
-        white-space: pre-line;
-        opacity: 0;
-        max-width: 90%;
-        line-height: 1.5;
-        margin-top: 10px;
-    }
-    .fade-in {
-        animation: fadeIn 1s forwards;
-    }
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-    .highlight {
-        color: red;
-        cursor: pointer;
     }
 
-    /* Ikon 2x2 */
+    /* Animasi teks typing */
+    .typing-text {
+        font-size: 18px;
+        white-space: nowrap;
+        overflow: hidden;
+        border-right: 2px solid yellow;
+        width: 0;
+        margin: 0 auto 15px;
+        animation: typing 5s steps(60, end) forwards, blink 0.8s infinite;
+    }
+
+    @keyframes typing {
+        from { width: 0; }
+        to { width: 380px; }
+    }
+
+    @keyframes blink {
+        50% { border-color: transparent; }
+    }
+
+    .donasi-link {
+        color: yellow;
+        text-decoration: none;
+    }
+    .donasi-link:hover {
+        text-decoration: underline;
+    }
+
+    /* Icon 2x2 */
     .icon-grid {
         display: grid;
-        grid-template-columns: repeat(2, 80px);
+        grid-template-columns: repeat(2, 100px);
         grid-gap: 20px;
-        margin-bottom: 40px;
+        justify-content: center;
+        margin-bottom: 20px;
     }
-    .icon-grid img {
-        width: 80px;
-        height: 80px;
-        cursor: pointer;
+
+    .icon-grid a img {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
         transition: transform 0.3s ease;
+        animation: iconFloat 3s ease-in-out infinite;
     }
-    .icon-grid img:hover {
+
+    .icon-grid a img:hover {
         transform: scale(1.1);
     }
 
+    @keyframes iconFloat {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+    }
+
     /* Area bawah */
-    .bottom-scene {
+    .bottom-icons {
         display: flex;
+        justify-content: center;
         align-items: flex-end;
-        gap: 30px;
-        margin-bottom: 20px;
+        margin-top: 20px;
+        gap: 50px;
     }
+
     .campfire {
-        width: 100px;
-        height: 100px;
-        animation: flicker 1s infinite alternate;
+        width: 120px;
+        animation: campfireShake 1.5s infinite ease-in-out;
     }
-    @keyframes flicker {
-        0% { filter: brightness(0.8); }
-        100% { filter: brightness(1.2); }
+
+    @keyframes campfireShake {
+        0%, 100% { transform: rotate(0deg); }
+        50% { transform: rotate(1deg); }
     }
-    .guitar-man {
-        height: 120px;
+
+    .guitar {
+        width: 120px;
+        animation: guitarMove 2s infinite ease-in-out;
+    }
+
+    @keyframes guitarMove {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-3px); }
     }
 </style>
 </head>
 <body>
 
-    <!-- Logo bergerak -->
-    <img src="logo.png" alt="Logo" class="logo">
+<div class="container">
+    <!-- Teks -->
+    <div class="typing-text">
+        Terimakasih telah mengunjungi dan support!, 
+        Donasi? <a href="https://link-donasi.com" class="donasi-link">Klik disini</a>
+    </div>
 
-    <!-- Teks animasi -->
-    <div id="typing" class="typing-text"></div>
-
-    <!-- Ikon 2x2 -->
+    <!-- Icon 2x2 dengan link -->
     <div class="icon-grid">
-        <img src="whatsapp.png" alt="WhatsApp" onclick="window.location.href='https://wa.me/123456789'">
-        <img src="luna.png" alt="LunaAsistent" onclick="window.location.href='https://lunaasistent.com'">
-        <img src="saluran.png" alt="Saluran" onclick="window.location.href='https://example.com/saluran'">
-        <img src="tiktok.png" alt="TikTok" onclick="window.location.href='https://tiktok.com/@username'">
+        <a href="https://tiktok.com" target="_blank"><img src="tiktok.png" alt="TikTok"></a>
+        <a href="https://youtube.com" target="_blank"><img src="saluran.png" alt="Saluran"></a>
+        <a href="https://wa.me/nomor" target="_blank"><img src="whatsapp.png" alt="WhatsApp"></a>
+        <a href="https://lunamd-link.com" target="_blank"><img src="lunamd.png" alt="LunaMd"></a>
     </div>
 
-    <!-- Area bawah: api unggun & gitar -->
-    <div class="bottom-scene">
-        <img src="campfire.gif" alt="Api Unggun" class="campfire">
-        <img src="guitar-man.png" alt="Orang Main Gitar" class="guitar-man">
+    <!-- Api unggun & gitar -->
+    <div class="bottom-icons">
+        <img src="campfire.png" class="campfire" alt="Api Unggun">
+        <img src="guitar.png" class="guitar" alt="Orang Main Gitar">
     </div>
-
-    <audio autoplay loop>
-        <source src="sound.mp3" type="audio/mpeg">
-    </audio>
-
-<script>
-    const text = "Terimakasih yang telah support Ardan,\nAku sangat menghargainya!\nDonasi? <span class='highlight'>Klik disini</span>";
-    let index = 0;
-    const speed = 50;
-    const typingElement = document.getElementById("typing");
-
-    function typeWriter() {
-        if (index < text.length) {
-            typingElement.innerHTML += text.charAt(index);
-            typingElement.classList.add("fade-in");
-            index++;
-            setTimeout(typeWriter, speed);
-        }
-    }
-    typeWriter();
-
-    // Event listener untuk "Klik disini"
-    document.addEventListener("click", function(e) {
-        if (e.target.classList.contains("highlight")) {
-            window.location.href = "https://example.com/donasi";
-        }
-    });
-</script>
+</div>
 
 </body>
 </html>
