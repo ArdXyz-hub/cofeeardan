@@ -20,7 +20,7 @@
         height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         overflow: hidden;
         background: url('background.png') center/cover no-repeat;
@@ -37,10 +37,26 @@
         z-index: 0;
     }
 
-    .container {
+    .content {
         position: relative;
         z-index: 1;
-        text-align: center;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Logo animasi */
+    .logo {
+        width: 120px;
+        margin-top: 20px;
+        animation: logoSpin 5s linear infinite;
+    }
+
+    @keyframes logoSpin {
+        0% { transform: rotate(0deg) scale(1); }
+        50% { transform: rotate(180deg) scale(1.1); }
+        100% { transform: rotate(360deg) scale(1); }
     }
 
     /* Animasi teks typing */
@@ -50,8 +66,9 @@
         overflow: hidden;
         border-right: 2px solid yellow;
         width: 0;
-        margin: 0 auto 15px;
+        margin: 20px auto 40px;
         animation: typing 5s steps(60, end) forwards, blink 0.8s infinite;
+        text-align: center;
     }
 
     @keyframes typing {
@@ -75,9 +92,9 @@
     .icon-grid {
         display: grid;
         grid-template-columns: repeat(2, 100px);
-        grid-gap: 20px;
+        grid-gap: 25px;
         justify-content: center;
-        margin-bottom: 20px;
+        margin-bottom: 60px; /* jarak ke bawah */
     }
 
     .icon-grid a img {
@@ -102,8 +119,8 @@
         display: flex;
         justify-content: center;
         align-items: flex-end;
-        margin-top: 20px;
-        gap: 50px;
+        margin-bottom: 30px;
+        gap: 80px; /* Jarak antar icon bawah */
     }
 
     .campfire {
@@ -129,27 +146,32 @@
 </head>
 <body>
 
-<div class="container">
-    <!-- Teks -->
+<div class="content">
+
+    <!-- Logo animasi -->
+    <img src="logo.png" alt="Logo" class="logo">
+
+    <!-- Teks ucapan -->
     <div class="typing-text">
         Terimakasih telah mengunjungi dan support!, 
         Donasi? <a href="https://link-donasi.com" class="donasi-link">Klik disini</a>
     </div>
 
-    <!-- Icon 2x2 dengan link -->
+    <!-- Icon 2x2 di tengah -->
     <div class="icon-grid">
         <a href="https://tiktok.com" target="_blank"><img src="tiktok.png" alt="TikTok"></a>
         <a href="https://youtube.com" target="_blank"><img src="saluran.png" alt="Saluran"></a>
         <a href="https://wa.me/nomor" target="_blank"><img src="whatsapp.png" alt="WhatsApp"></a>
         <a href="https://lunamd-link.com" target="_blank"><img src="lunamd.png" alt="LunaMd"></a>
     </div>
+</div>
 
-    <!-- Api unggun & gitar -->
-    <div class="bottom-icons">
-        <img src="campfire.png" class="campfire" alt="Api Unggun">
-        <img src="guitar.png" class="guitar" alt="Orang Main Gitar">
-    </div>
+<!-- Api unggun & gitar di bawah -->
+<div class="bottom-icons">
+    <img src="campfire.png" class="campfire" alt="Api Unggun">
+    <img src="guitar.png" class="guitar" alt="Orang Main Gitar">
 </div>
 
 </body>
-</html>
+                                                              </html>
+        
