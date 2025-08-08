@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>beranda</title>
+<title>Halaman Keren</title>
 
 <style>
     /* Import font Minecraft */
@@ -17,11 +17,10 @@
         padding: 0;
         height: 100vh;
         background: url('video.png') no-repeat center center/cover;
-        filter: blur(0px);
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
         backdrop-filter: blur(3px) brightness(0.7);
         font-family: 'Minecraft', sans-serif;
         overflow: hidden;
@@ -33,6 +32,7 @@
         width: 80px;
         height: 80px;
         animation: bounce 2s infinite;
+        margin-top: 20px;
     }
     @keyframes bounce {
         0%, 100% { transform: translateY(0); }
@@ -45,6 +45,9 @@
         text-align: center;
         white-space: pre-line;
         opacity: 0;
+        max-width: 90%;
+        line-height: 1.5;
+        margin-top: 10px;
     }
     .fade-in {
         animation: fadeIn 1s forwards;
@@ -53,13 +56,17 @@
         from { opacity: 0; }
         to { opacity: 1; }
     }
+    .highlight {
+        color: red;
+        cursor: pointer;
+    }
 
     /* Ikon 2x2 */
     .icon-grid {
         display: grid;
         grid-template-columns: repeat(2, 80px);
         grid-gap: 20px;
-        margin-top: 20px;
+        margin-bottom: 40px;
     }
     .icon-grid img {
         width: 80px;
@@ -69,6 +76,26 @@
     }
     .icon-grid img:hover {
         transform: scale(1.1);
+    }
+
+    /* Area bawah */
+    .bottom-scene {
+        display: flex;
+        align-items: flex-end;
+        gap: 30px;
+        margin-bottom: 20px;
+    }
+    .campfire {
+        width: 100px;
+        height: 100px;
+        animation: flicker 1s infinite alternate;
+    }
+    @keyframes flicker {
+        0% { filter: brightness(0.8); }
+        100% { filter: brightness(1.2); }
+    }
+    .guitar-man {
+        height: 120px;
     }
 </style>
 </head>
@@ -88,19 +115,25 @@
         <img src="tiktok.png" alt="TikTok" onclick="window.location.href='https://tiktok.com/@username'">
     </div>
 
+    <!-- Area bawah: api unggun & gitar -->
+    <div class="bottom-scene">
+        <img src="campfire.gif" alt="Api Unggun" class="campfire">
+        <img src="guitar-man.png" alt="Orang Main Gitar" class="guitar-man">
+    </div>
+
     <audio autoplay loop>
         <source src="sound.mp3" type="audio/mpeg">
     </audio>
 
 <script>
-    const text = "Terimakasih yang telah support Ardan,\nAku sangat menghargainya!\nDonasi? Klik disini";
+    const text = "Terimakasih yang telah support Ardan,\nAku sangat menghargainya!\nDonasi? <span class='highlight'>Klik disini</span>";
     let index = 0;
-    const speed = 50; // kecepatan ketik (ms)
+    const speed = 50;
     const typingElement = document.getElementById("typing");
 
     function typeWriter() {
         if (index < text.length) {
-            typingElement.textContent += text.charAt(index);
+            typingElement.innerHTML += text.charAt(index);
             typingElement.classList.add("fade-in");
             index++;
             setTimeout(typeWriter, speed);
@@ -108,9 +141,9 @@
     }
     typeWriter();
 
-    // Link di "Klik disini"
-    typingElement.addEventListener("click", function(e) {
-        if (e.target.textContent.includes("Klik disini")) {
+    // Event listener untuk "Klik disini"
+    document.addEventListener("click", function(e) {
+        if (e.target.classList.contains("highlight")) {
             window.location.href = "https://example.com/donasi";
         }
     });
