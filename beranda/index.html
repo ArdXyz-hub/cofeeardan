@@ -4,13 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tampilan Keren 2x2</title>
+
+    <!-- Import font dari file -->
     <style>
+        @font-face {
+            font-family: 'FontKeren';
+            src: url('fontku.ttf') format('truetype');
+        }
+
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
             overflow: hidden;
-            font-family: sans-serif;
+            font-family: 'FontKeren', sans-serif;
             background: url('background.png') no-repeat center center/cover;
             color: white;
             text-align: center;
@@ -53,15 +60,26 @@
             animation: fadeInUp 1.5s ease-out;
         }
 
-        .icons-grid img {
+        .icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .icon-item img {
             width: 80px;
             height: 80px;
-            cursor: pointer;
             transition: transform 0.3s;
         }
 
-        .icons-grid img:hover {
+        .icon-item img:hover {
             transform: scale(1.2) rotate(5deg);
+        }
+
+        .icon-label {
+            margin-top: 8px;
+            font-size: 14px;
         }
 
         /* Bagian bawah */
@@ -109,6 +127,11 @@
 </head>
 <body>
 
+    <!-- Auto play sound -->
+    <audio autoplay loop>
+        <source src="sound.mp3" type="audio/mpeg">
+    </audio>
+
     <div class="container">
         
         <!-- Teks animasi -->
@@ -119,10 +142,22 @@
 
         <!-- Icon 2x2 -->
         <div class="icons-grid">
-            <img src="whatsapp.png" alt="WhatsApp">
-            <img src="lunaasistent.png" alt="LunaAsistent">
-            <img src="saluran.png" alt="Saluran">
-            <img src="tiktok.png" alt="TikTok">
+            <div class="icon-item" onclick="window.open('https://wa.me/628123456789', '_blank')">
+                <img src="whatsapp.png" alt="WhatsApp">
+                <div class="icon-label">WhatsApp</div>
+            </div>
+            <div class="icon-item" onclick="window.open('https://lunaasistent.com', '_blank')">
+                <img src="lunaasistent.png" alt="LunaAsistent">
+                <div class="icon-label">LunaAsistent</div>
+            </div>
+            <div class="icon-item" onclick="window.open('https://youtube.com/saluranmu', '_blank')">
+                <img src="saluran.png" alt="Saluran">
+                <div class="icon-label">Saluran</div>
+            </div>
+            <div class="icon-item" onclick="window.open('https://tiktok.com/@username', '_blank')">
+                <img src="tiktok.png" alt="TikTok">
+                <div class="icon-label">TikTok</div>
+            </div>
         </div>
 
         <!-- Api unggun & gitar -->
@@ -134,5 +169,4 @@
     </div>
 
 </body>
-  </html>
-  
+</html>
