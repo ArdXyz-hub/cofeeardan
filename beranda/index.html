@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tampilan Keren 2x2</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: sans-serif;
+            background: url('background.png') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        /* Teks animasi di atas */
+        .top-text {
+            padding: 20px;
+            font-size: 18px;
+            max-width: 90%;
+            margin: 0 auto;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .top-text a {
+            color: yellow;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .top-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* Grid icon 2x2 */
+        .icons-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 100px);
+            grid-gap: 30px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .icons-grid img {
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .icons-grid img:hover {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        /* Bagian bawah */
+        .bottom-scene {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 20px;
+            padding-bottom: 30px;
+            animation: fadeUp 2s ease-out;
+        }
+
+        .campfire {
+            width: 120px;
+            animation: flicker 0.4s infinite alternate;
+        }
+
+        .guitar-player {
+            width: 150px;
+        }
+
+        /* Animasi flicker api */
+        @keyframes flicker {
+            0% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+            50% { transform: scale(1.05) rotate(-2deg); filter: brightness(1.3); }
+            100% { transform: scale(1) rotate(2deg); filter: brightness(0.9); }
+        }
+
+        /* Animasi masuk */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Teks animasi -->
+        <div class="top-text">
+            Terimakasih yang telah support Ardan, Aku sangat menghargai nya!, Donasi? 
+            <a href="https://link-donasi-kamu.com" target="_blank">Klik disini</a>
+        </div>
+
+        <!-- Icon 2x2 -->
+        <div class="icons-grid">
+            <img src="whatsapp.png" alt="WhatsApp">
+            <img src="lunaasistent.png" alt="LunaAsistent">
+            <img src="saluran.png" alt="Saluran">
+            <img src="tiktok.png" alt="TikTok">
+        </div>
+
+        <!-- Api unggun & gitar -->
+        <div class="bottom-scene">
+            <img src="campfire.png" class="campfire" alt="Api Unggun">
+            <img src="guitar.png" class="guitar-player" alt="Orang Bermain Gitar">
+        </div>
+
+    </div>
+
+</body>
+  </html>
+  
